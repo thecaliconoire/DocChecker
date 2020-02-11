@@ -114,14 +114,11 @@ export default class Dropzonebox extends Component {
                     showFileNamesInPreview={true}
                     filesLimit={5}
                     fullWidth={false}
+                    dropzoneText={"Please drop a .jpeg, .png, .bmp or a .pdf file"}
                    
                 />
-
-
                 <br/>
                 <br/>
- 
-       
                 <div className={`button ${this.state.files.length > 0 ? '' : 'display-none'}`} >
                 <Button variant="contained" color="primary" onClick={this.handleSave.bind(this)}>
                   Submit

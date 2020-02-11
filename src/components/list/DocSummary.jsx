@@ -4,6 +4,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 import { List, ListItemAvatar } from '@material-ui/core';
+import Divider from '@material-ui/core/Divider';
 import moment from 'moment';
 import "./styles.scss"
 
@@ -28,8 +29,6 @@ class DocSummary extends React.Component {
       console.log(files)
     })
     .catch(error=>console.log(error))
-  
-    
 }
 render(){
   return (
@@ -38,13 +37,19 @@ render(){
     
   <List>
   {this.state.files && this.state.files.map(file=>{
-    
+  
     return(
-    <ListItem   button ><FileCopyOutlinedIcon className="icon" fontSize="large"/>
-    <p className="listcomp"><b>File Name: {file.name}</b>  <br/>  <b>Size (bytes): {file.size} </b><br/> <b>Created at: {moment(file.created.toDate()).calendar()}</b></p> </ListItem>
+    
+    <ListItem button ><FileCopyOutlinedIcon className="icon" fontSize="large"/>
+    <p className="listcomp"><b>File Name: {file.name}</b>  
+    <br/>  
+    <b>Size (bytes): {file.size} </b>
+    <br/> 
+    <b>Created at: {moment(file.created.toDate()).calendar()}</b></p> </ListItem>
     )
-  })
+    } )
   }
+  
   </List>
       </div>
     </div>
