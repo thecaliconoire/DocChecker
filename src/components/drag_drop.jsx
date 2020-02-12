@@ -1,20 +1,11 @@
 import React, { Component } from 'react'
-import {DropzoneDialog, DropzoneArea} from 'material-ui-dropzone'
+import { DropzoneArea } from 'material-ui-dropzone'
 import Button from '@material-ui/core/Button';
-import storage, {db} from '../store/config';
-import { AppBar } from '@material-ui/core';
+
 import firebase from "firebase/app";
 import './styles.scss'
-import context from '../store/context'
-// Todo: if-check when submitting 0 files:  TypeError: Cannot read property '0' of null
- 
-// Todo: fix upload process for arbitrary amount of files Solution: grey button so you cannot submit or print error on screen.
- 
-// Todo: store the firestore refs(!) in the firebase DB
- 
-// Todo: Display list of all URL's //DONE
- 
-// Todo: Make Pretty
+
+
 export default class Dropzonebox extends Component {
     constructor(props) {
         super(props);
@@ -69,37 +60,18 @@ export default class Dropzonebox extends Component {
             .child(`files/${file.name}`)
          
          console.log("fileRef ", fileRef)
- 
          const uploadResult = await fileRef.put(file);
- 
          console.log("Upload: ", uploadResult);
- 
-            this.ref.add({
-                name: fileRef.name,
-                size: uploadResult.totalBytes,
-                created: new Date() 
-            }).then((docRef)=>{
-              if (index == array.length - 1) {
-                this.setState({
-                  files:[],
-                  showDropzone: false
-                })
+         
+            if (index == array.length - 1) {
+                 this.setState({
+                   files:[],
+                   showDropzone: false
+                 })
               }
-                
- 
-            })
-            .catch((error)=> {
-                console.error("Error adding document: ", error)
-            });
  
         });
-         
-         
- 
- 
     }
- 
- 
  
     render() {
      
@@ -114,11 +86,15 @@ export default class Dropzonebox extends Component {
                     showFileNamesInPreview={true}
                     filesLimit={5}
                     fullWidth={false}
-                    dropzoneText={"Please drop a .jpeg, .png, .bmp or a .pdf file"}
+
                    
                 />
+
+
                 <br/>
                 <br/>
+ 
+       
                 <div className={`button ${this.state.files.length > 0 ? '' : 'display-none'}`} >
                 <Button variant="contained" color="primary" onClick={this.handleSave.bind(this)}>
                   Submit
